@@ -12,15 +12,17 @@ Terraform module to create S3 static website, along with CloudFormation distribu
 
 | Name | Description |
 |------|-------------|
-| sns\_topic\_arn | The ARN of the SNS topic |
+| cf\_domain\_name | CloudFront Domain name (for use in DNS) |
 
 ## Examples
 
 ```hcl
-module "sns-pagerduty" {
-  source             = "https://github.com/SequoiaConsulting/terraform-pagerduty-sns.git?ref=v1.0"
-  display_name       = "PagerDutySNSDemo"
-  pagerduty_endpoint = "https://events.pagerduty.com/integration/EXAMPLE_KEY/enqueue"
-  sns_topic_name     = "pagerduty-sns-demo"
+module "my-website" {
+  providers = {
+    aws = aws.production
+  }
+  source ="git@github.com:SequoiaConsulting/terraform-s3-cf-website.git?ref=v1.0"
+  host  = "thenextbigthingto.com"
+  certificate_arn = "arn:aws:acm:us-east-1:111111111111:certificate/59b6cdef-5911-09e8-3i9d-ck0370p3e812"
 }
 ```
