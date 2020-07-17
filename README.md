@@ -26,3 +26,6 @@ module "my-website" {
   certificate_arn = "arn:aws:acm:us-east-1:111111111111:certificate/59b6cdef-5911-09e8-3i9d-ck0370p3e812"
 }
 ```
+## Credits
+Most of the source code written in this module was referred from:
+https://medium.com/runatlantis/hosting-our-static-site-over-ssl-with-s3-acm-cloudfront-and-terraform-513b799aec0f
