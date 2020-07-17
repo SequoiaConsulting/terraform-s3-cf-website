@@ -1,5 +1,5 @@
 # terraform-s3-cf-website
-Terraform module to create S3 static website, along with CloudFormation distribution for it to enable serving through SSL
+Terraform module to create S3 static website, along with CloudFormation distribution for it to enable serving through SSL.
 
 ## Inputs
 
@@ -9,7 +9,6 @@ Terraform module to create S3 static website, along with CloudFormation distribu
 | certificate\_arn | Certificate ARN from AWS Certificate Manager | string | `""` | yes |
 | logs\_bucket | S3 bucket to use for logging | string | `""` | yes |
 | logs\_path | Path for logs in S3 bucket | string | `""` | yes |
-| region | Region for S3 bucket (for example: us-west-2) | string | `""` | yes |
 
 ## Outputs
 
@@ -29,7 +28,6 @@ module "my-website" {
   certificate_arn = "arn:aws:acm:us-east-1:111111111111:certificate/59b6cdef-5911-09e8-3i9d-ck0370p3e812"
   logs_bucket = "next-big-thing-logs"
   logs_path = "logs/"
-  region = "us-east-1"
 }
 ```
 ## Credits
