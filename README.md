@@ -1,5 +1,5 @@
 # terraform-s3-cf-website
-Terraform module to create S3 static website, along with CloudFormation distribution for it to enable serving through SSL. This module is meant to be used in **us-east-1 (N. Virginia) region only** as CloudFormation distrubution only supports ACM certificate from us-east-1. If you try to use a different region, you may encounter a lot of issues with respect to region.
+Terraform module to create S3 static website along with CloudFormation distribution for it to enable serving through SSL (HTTPS). This module is meant to be used in **us-east-1 (N. Virginia) region only** as CloudFormation distrubution only supports ACM certificate from us-east-1. If you try to use a different region, you may encounter a lot of issues with respect to region.
 
 ## Inputs
 
