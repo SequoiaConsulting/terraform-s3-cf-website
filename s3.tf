@@ -2,6 +2,7 @@ resource "aws_s3_bucket" "www" {
   bucket = var.host
   acl    = "public-read"
   force_destroy = true
+  region = var.region
   // We also need to create a policy that allows anyone to view the content.
   // This is basically duplicating what we did in the ACL but it's required by
   // AWS. This post: http://amzn.to/2Fa04ul explains why.
