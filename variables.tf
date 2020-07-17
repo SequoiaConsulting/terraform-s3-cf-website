@@ -1,7 +1,6 @@
 variable "host" {
   type = string
   description = "Host for the website"
-  default = "example.sequoia.com"
 }
 
 variable "certificate_arn" {
