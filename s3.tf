@@ -24,5 +24,11 @@ POLICY
     error_document = "404.html"
   }
 
-  server_side_encryption = var.enable_s3_encryption == true ? "AES256" : null
+  server_side_encryption_configuration {
+    rule {
+      apply_server_side_encryption_by_default {
+        sse_algorithm     = "AES256"
+      }
+    }
+ }
 }
