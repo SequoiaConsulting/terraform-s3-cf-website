@@ -7,6 +7,9 @@ Terraform module to create S3 static website, along with CloudFormation distribu
 |------|-------------|:----:|:-----:|:-----:|
 | host |  Host for the website | string | `""` | yes |
 | certificate\_arn | Certificate ARN from AWS Certificate Manager | string | `""` | yes |
+| logs\_bucket | S3 bucket to use for logging | string | `""` | yes |
+| logs\_path | Path for logs in S3 bucket | string | `""` | yes |
+
 
 ## Outputs
 

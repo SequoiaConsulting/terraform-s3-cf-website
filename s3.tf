@@ -33,8 +33,8 @@ POLICY
   }
 
   logging {
-    target_bucket = "${aws_s3_bucket.www.id}"
-    target_prefix = "log/"
+    target_bucket = var.logs_bucket
+    target_prefix = var.logs_path
   }
 
 }

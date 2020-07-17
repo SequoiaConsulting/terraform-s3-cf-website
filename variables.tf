@@ -7,3 +7,13 @@ variable "certificate_arn" {
   type = string
   description = "Certificate ARN from AWS Certificate Manager"
 }
+
+variable "logs_bucket" {
+  type = string
+  description = "S3 bucket for logging"
+}
+
+variable "logs_path" {
+  type = string
+  description = "Path for logs in S3 bucket"
+}
