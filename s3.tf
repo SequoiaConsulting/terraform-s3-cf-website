@@ -1,0 +1,28 @@
+resource "aws_s3_bucket" "www" {
+  bucket = var.host
+  acl    = "public-read"
+  // We also need to create a policy that allows anyone to view the content.
+  // This is basically duplicating what we did in the ACL but it's required by
+  // AWS. This post: http://amzn.to/2Fa04ul explains why.
+  policy = <<POLICY
+{
+  "Version":"2012-10-17",
+  "Statement":[
+    {
+      "Sid":"AddPerm",
+      "Effect":"Allow",
+      "Principal": "*",
+      "Action":["s3:GetObject"],
+      "Resource":["arn:aws:s3:::${var.host}/*"]
+    }
+  ]
+}
+POLICY
+
+  website {
+    index_document = "index.html"
+    error_document = "404.html"
+  }
+
+  server_side_encryption = var.enable_s3_encryption == true ? "AES256" : null
+}
