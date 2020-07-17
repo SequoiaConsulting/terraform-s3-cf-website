@@ -30,5 +30,11 @@ POLICY
         sse_algorithm     = "AES256"
       }
     }
- }
+  }
+
+  logging {
+    target_bucket = "${aws_s3_bucket.www.id}"
+    target_prefix = "log/"
+  }
+
 }
