@@ -25,11 +25,13 @@ POLICY
     error_document = "404.html"
   }
 
-  dynamic "server_side_encryption_configuration" {
+  dynamic "sse" {
     for_each = var.enable_encryption == true ? [var.enable_encryption] : []
-    rule {
-      apply_server_side_encryption_by_default {
-        sse_algorithm     = "AES256"
+    server_side_encryption_configuration {
+      rule {
+        apply_server_side_encryption_by_default {
+          sse_algorithm     = "AES256"
+        }
       }
     }
   }
