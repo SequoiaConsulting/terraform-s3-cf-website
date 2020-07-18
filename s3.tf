@@ -27,9 +27,11 @@ POLICY
 
   dynamic "server_side_encryption_configuration" {
     for_each = var.enable_encryption == true ? [var.enable_encryption] : []
-    rule {
-      apply_server_side_encryption_by_default {
-        sse_algorithm     = "AES256"
+    content {
+      rule {
+        apply_server_side_encryption_by_default {
+          sse_algorithm     = "AES256"
+        }
       }
     }
   }
