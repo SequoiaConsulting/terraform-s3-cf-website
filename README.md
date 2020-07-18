@@ -9,12 +9,15 @@ Terraform module to create S3 static website along with CloudFront distribution 
 | certificate\_arn | Certificate ARN from AWS Certificate Manager | string | `""` | yes |
 | logs\_bucket | S3 bucket to use for logging | string | `""` | yes |
 | logs\_path | Path for logs in S3 bucket | string | `""` | yes |
+| enable\_encryption | Enable or disable incryption for S3 bucket | bool | true | no |
 
 ## Outputs
 
 | Name | Description |
 |------|-------------|
 | cf\_domain\_name | CloudFront Domain name (for use in DNS) |
+| s3\_bucket\_name | S3 Bucket name |
+
 
 ## Examples
 
