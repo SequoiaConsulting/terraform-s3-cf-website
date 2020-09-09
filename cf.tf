@@ -32,10 +32,10 @@ resource "aws_cloudfront_distribution" "www_distribution" {
     domain_name = aws_s3_bucket.www.bucket_regional_domain_name
     origin_id   = local.s3_origin_id
 
-  s3_origin_config {
-    origin_access_identity = aws_cloudfront_origin_access_identity.origin_access_identity.cloudfront_access_identity_path
+    s3_origin_config {
+      origin_access_identity = aws_cloudfront_origin_access_identity.origin_access_identity.cloudfront_access_identity_path
+    }
   }
-
   enabled             = true
   default_root_object = "index.html"
 
