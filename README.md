@@ -22,8 +22,9 @@ Terraform module to create S3 static website along with CloudFront distribution 
 ## Examples
 
 ```hcl
-module "my-website" {
-  source ="git@github.com:SequoiaConsulting/terraform-s3-cf-website.git?ref=v1.0"
+module "my-s3-cf-website" {
+  source  = "sharath-sequoia/cf-website/s3"
+  version = "1.3.0"
   host  = "thenextbigthingto.com"
   certificate_arn = "arn:aws:acm:us-east-1:111111111111:certificate/59b6cdef-5911-09e8-3i9d-ck0370p3e812"
   logs_bucket = "next-big-thing-logs"
