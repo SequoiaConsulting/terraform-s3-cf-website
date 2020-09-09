@@ -15,6 +15,21 @@ resource "aws_s3_bucket" "www" {
       "Principal": "*",
       "Action":["s3:GetObject"],
       "Resource":["arn:aws:s3:::${var.host}/*"]
+    },
+    {
+      "Sid": "AllowSSLRequestsOnly",
+      "Effect": "Deny",
+      "Principal": "*",
+      "Action": "s3:*",
+      "Resource": [
+          "arn:aws:s3:::${var.host}",
+          "arn:aws:s3:::${var.host}/*"
+      ],
+      "Condition": {
+          "Bool": {
+              "aws:SecureTransport": "false"
+          }
+      }
     }
   ]
 }
