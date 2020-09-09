@@ -1,5 +1,14 @@
+locals {
+  s3_origin_id = "myS3Origin"
+}
+
+resource "aws_cloudfront_origin_access_identity" "origin_access_identity" {
+  comment = "CF Origin identity for ${var.host}"
+}
+
 resource "aws_cloudfront_distribution" "www_distribution" {
   // origin is where CloudFront gets its content from.
+  /*
   origin {
     // We need to set up a "custom" origin because otherwise CloudFront won't
     // redirect traffic from the root domain to the www domain, that is from
@@ -17,6 +26,15 @@ resource "aws_cloudfront_distribution" "www_distribution" {
     // This can be any name to identify this origin.
     origin_id   = var.host
   }
+  */
+
+  origin {
+    domain_name = aws_s3_bucket.www.bucket_regional_domain_name
+    origin_id   = local.s3_origin_id
+
+  s3_origin_config {
+    origin_access_identity = aws_cloudfront_origin_access_identity.origin_access_identity.cloudfront_access_identity_path
+  }
 
   enabled             = true
   default_root_object = "index.html"
@@ -28,7 +46,8 @@ resource "aws_cloudfront_distribution" "www_distribution" {
     allowed_methods        = ["GET", "HEAD"]
     cached_methods         = ["GET", "HEAD"]
     // This needs to match the `origin_id` above.
-    target_origin_id       = var.host
+    #target_origin_id       = var.host
+    target_origin_id       = local.s3_origin_id
     min_ttl                = 0
     default_ttl            = 86400
     max_ttl                = 31536000
@@ -41,8 +60,6 @@ resource "aws_cloudfront_distribution" "www_distribution" {
     }
   }
 
-  // Here we're ensuring we can hit this distribution using www.runatlantis.io
-  // rather than the domain name CloudFront gives us.
   aliases = [var.host]
 
   restrictions {
@@ -51,7 +68,6 @@ resource "aws_cloudfront_distribution" "www_distribution" {
     }
   }
 
-  // Here's where our certificate is loaded in!
   viewer_certificate {
     acm_certificate_arn = var.certificate_arn
     ssl_support_method  = "sni-only"
