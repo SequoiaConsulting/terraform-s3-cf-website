@@ -1,6 +1,6 @@
 resource "aws_s3_bucket" "www" {
   bucket = var.host
-  acl    = "public-read"
+#  acl    = "public-read"
   force_destroy = true
   // We also need to create a policy that allows anyone to view the content.
   // This is basically duplicating what we did in the ACL but it's required by
@@ -12,7 +12,9 @@ resource "aws_s3_bucket" "www" {
     {
       "Sid":"AddPerm",
       "Effect":"Allow",
-      "Principal": "*",
+      "Principal": {
+        "AWS": "${aws_cloudfront_origin_access_identity.origin_access_identity.iam_arn}"
+      }
       "Action":["s3:GetObject"],
       "Resource":["arn:aws:s3:::${var.host}/*"]
     },
